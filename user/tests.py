@@ -76,7 +76,32 @@ class UsersTest(APITestCase):
 
         self.response_field(data, 'username')
 
-    
+    def test_create_user_with_preexisting_email(self):
+        data = {
+            'username': 'testuser',
+            'email': 'user@example.com',
+            'password': 'testuser'
+        }
+
+        self.response_field(data, 'email')
+
+    def test_create_user_with_invalid_email(self):
+        data = {
+            'username': 'testuser',
+            'email': 'testing',
+            'password': 'testuser'
+        }
+
+        self.response_field(data, 'email')
+
+    def test_create_user_with_no_email(self):
+        data = {
+            'username': 'testuser',
+            'email': '',
+            'password': 'testuser'
+        }
+
+        self.response_field(data, 'email')
 
     def response_field(self, data, field):
         response = self.client.post(self.create_url, data, format='json')
