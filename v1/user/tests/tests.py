@@ -20,6 +20,7 @@ class UsersTest(APITestCase):
         """
         Ensure we can create a new user and a valid token is created with it.
         """
+
         data = {
             'username': 'foobar',
             'email': 'foobar@example.com',
@@ -116,4 +117,6 @@ class UsersTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(User.objects.count(), 1)
         self.assertEqual(len(response.data[field]), 1)
+
+
 
