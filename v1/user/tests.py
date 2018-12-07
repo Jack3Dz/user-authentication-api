@@ -1,5 +1,5 @@
 from django.urls import reverse
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, APIClient
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from rest_framework import status
@@ -11,6 +11,10 @@ class UsersTest(APITestCase):
 
         # URL for creating an user.
         self.create_url = reverse('user-create')
+
+        user = User.objects.get(username='testuser')
+        self.client = APIClient()
+        self.client.force_authenticate(user=user)
 
     def test_create_user(self):
         """
