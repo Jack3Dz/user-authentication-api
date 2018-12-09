@@ -7,7 +7,7 @@ SECRET_KEY = '7!ee-@85koj)*iu6@54*ko)rq8bq62o5r4w1o)2)n6u0!i07cu'
 INSTALLED_APPS = [
 
     # API (v1)
-    'v1.user',
+    'src.v1.user',
 
     # Base
     'django.contrib.admin',
@@ -64,8 +64,7 @@ REST_FRAMEWORK = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
