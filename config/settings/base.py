@@ -25,6 +25,8 @@ INSTALLED_APPS = [
 
 ]
 
+SITE_ID = 1
+
 ALLOWED_HOSTS = ['*']
 # AUTH_USER_MODEL = 'user.Profile'
 
