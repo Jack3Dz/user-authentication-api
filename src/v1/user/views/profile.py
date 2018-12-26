@@ -23,7 +23,7 @@ class ProfileView(APIView):
 class ProfileDetail(APIView):
 
     @staticmethod
-    def patch(request, profile_id):
+    def get(request, profile_id):
         """
         Update profile of authenticated user
         """
