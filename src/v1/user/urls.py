@@ -6,9 +6,7 @@ from .views.login import LoginView
 from .views.logout import LogoutView
 
 
-
 urlpatterns = [
-
     # Login / logout
     path('login/', LoginView.as_view(), name='user-login'),
     path('logout/', LogoutView.as_view(), name='user-logout'),
@@ -19,5 +17,4 @@ urlpatterns = [
 
     # Users
     path('users/', UserView.as_view(), name='user-create'),
-
 ]
