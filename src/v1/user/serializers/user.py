@@ -8,6 +8,7 @@ from .profile import ProfileSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     profile = serializers.SerializerMethodField()
+    image = serializers.ImageField(write_only=True)
     email = serializers.EmailField(
         required=True,
         validators=[UniqueValidator(queryset=User.objects.all())]
@@ -18,6 +19,18 @@ class UserSerializer(serializers.ModelSerializer):
     )
     password = serializers.CharField(min_length=6, write_only=True)
 
+    def create(self, validated_data):
+        user = User(email=validated_data['email'],
+                    username=validated_data['username'])
+        user.set_password(validated_data['password'])
+        user.save()
+        Profile.objects.create(user=user, image=validated_data['image'])
+        return user
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'password', 'profile', 'image')
+
     @staticmethod
     def get_profile(user):
         """
@@ -27,16 +40,9 @@ class UserSerializer(serializers.ModelSerializer):
         profile, created = Profile.objects.get_or_create(user=user)
         return ProfileSerializer(profile, read_only=True).data
 
-    def create(self, validated_data):
-        user = User(email=validated_data['email'],
-                    username=validated_data['username'])
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
-
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password', 'profile')
+        fields = ('id', 'username', 'email', 'password', 'profile', 'image')
 
 
 class UserSerializerLogin(UserSerializer):
