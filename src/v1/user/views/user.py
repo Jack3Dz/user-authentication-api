@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from src.v1.user.serializers.serializers import UserSerializer
+from src.v1.user.serializers.user import UserSerializer
 from rest_framework.authtoken.models import Token
 
 
